@@ -180,9 +180,11 @@ class GDBResponseListener(Thread):
 
             try:
                 responses = self._gdb_controller.get_gdb_response(
-                    timeout_sec=0.0
+                    eager=True
                 )
-            except:
+            except KeyboardInterrupt:
+                raise
+            except Exception as e:
                 continue
 
             for response in responses:
